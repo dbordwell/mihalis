@@ -1,0 +1,73 @@
+runtime:
+  poll_interval_minutes: 10
+  metric_repoll_max_age_h: 48
+  min_age_hours: 1.0
+  max_age_hours: 72
+  min_score: 50
+  min_seconds: 40
+  max_seconds: 180
+  block_nsfw: true
+  baseline_warmup_days: 7
+
+subreddits:
+  # r/Karens and r/EntitledKaren removed — both archived/dead as of 2026-04
+  - {name: Karensinthewild, weight: 1.5}
+  - {name: FuckYouKaren, weight: 1.4}
+  - {name: PublicFreakout, weight: 1.0}
+  - {name: instant_regret, weight: 1.0}
+  - {name: IdiotsInCars, weight: 1.0}
+  - {name: byebyejob, weight: 1.0}
+  - {name: ConvenientCop, weight: 0.9}
+  - {name: EntitledPeople, weight: 0.6}
+  - {name: IDontWorkHereLady, weight: 0.6}
+
+allowed_domains:
+  - v.redd.it
+  - youtube.com
+  - youtu.be
+  - streamable.com
+  - i.imgur.com
+  - imgur.com
+  - gfycat.com
+
+ranker_weights:
+  score_velocity_z: 1.0
+  comment_velocity_z: 0.8
+  acceleration_z: 0.6
+  keyword_boost: 2.0
+  subreddit_weight: 1.0
+  saturation_penalty: 1.5
+
+ranker_caps:
+  max_keyword_boost: 3.0
+
+digest:
+  morning_local: "09:00"
+  evening_local: "19:00"
+  size: 10
+  send_empty_if_nothing_qualifies: false
+
+breaking_alerts:
+  enabled: true
+  z_score_threshold: 4.0
+  max_age_hours: 6
+  daily_cap: 3
+  quiet_hours_start_local: "00:00"
+  quiet_hours_end_local: "06:00"
+
+saturation:
+  mode: shadow
+  lookback_days: 30
+  title_similarity_threshold: 0.6
+  drop_if_views_above: 100000
+  drop_if_channel_subs_above: 50000
+  downrank_per_1k_views: 0.001
+  top_n_to_check: 30
+
+operator:
+  digest_local: "08:30"
+  size: 30
+
+watchdog:
+  heartbeat_max_age_minutes: 25
+  smoke_check_local: "11:00"

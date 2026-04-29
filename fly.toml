@@ -1,0 +1,43 @@
+app = "mihalis-db"
+primary_region = "iad"
+
+[build]
+
+[env]
+  DB_PATH = "/data/karen_finder.db"
+  TZ = "America/New_York"
+  LOG_LEVEL = "INFO"
+
+[mounts]
+  source = "karen_data"
+  destination = "/data"
+
+[[services]]
+  internal_port = 8080
+  protocol = "tcp"
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+    force_https = true
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+  [[services.http_checks]]
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "30s"
+    method = "get"
+    path = "/health"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"
+
+[deploy]
+  strategy = "immediate"

@@ -1,0 +1,47 @@
+[project]
+name = "karen-finder"
+version = "0.1.0"
+description = "Reddit discovery pipeline for non-viral Karen videos"
+requires-python = ">=3.11"
+dependencies = [
+  "requests>=2.31",
+  "sqlalchemy>=2.0",
+  "alembic>=1.13",
+  "apscheduler>=3.10,<4.0",
+  "python-telegram-bot>=20.7",
+  "structlog>=24.1",
+  "pydantic>=2.5",
+  "pydantic-settings>=2.1",
+  "pyyaml>=6.0",
+  "rapidfuzz>=3.6",
+  "google-api-python-client>=2.111",
+  "aiohttp>=3.9",
+  "tenacity>=8.2",
+  "click>=8.1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "pytest-asyncio>=0.23",
+  "freezegun>=1.4",
+  "ruff>=0.4",
+]
+
+[project.scripts]
+karen-finder = "karen_finder.__main__:cli"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["karen_finder*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
